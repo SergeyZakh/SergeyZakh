@@ -9,9 +9,11 @@ const ordner = dirname(fileURLToPath(import.meta.url));
 // Zahlen, die später eine Action täglich einsetzt
 const zahlen = { repos: 1, sterne: 1, follower: 1, beitraege: 312 };
 
-const BREITE = 66;          // Zeichen pro Zeile rechts
-const ZEICHEN = 8.8;        // Breite eines Zeichens bei 16px Consolas
-const ZEILE = 20;           // Zeilenabstand
+// Platz pro Zeichen für die breiteste übliche Schrift (Menlo, Courier New: 0,6em).
+// Consolas ist schmaler (8,8px); dort verteilt textLength den Rest als Abstand.
+// Safari beachtet textLength vermutlich nicht, dann bleibt die Zeile schmaler, aber nie zu breit.
+const ZEICHEN = 9.8;
+const ZEILE = 20;         // Zeilenabstand
 const TEXT_X = 230;
 const TEXT_Y = 40;
 
@@ -41,6 +43,9 @@ const zeilen = [
   { stats: [['Contributions (last year)', zahlen.beitraege]] },
 ];
 
+// Zeichen pro Zeile rechts: so viele, wie die längste Zeile mit drei Punkten braucht
+const BREITE = Math.max(...zeilen.filter(Array.isArray).map(([k, v]) => (k ? k.length + 2 : 0) + v.length + 6));
+
 // Pixelbild: S über Z, je 7 × 9
 const S = ['.######', '#######', '##.....', '##.....', '######.', '.######', '.....##', '#######', '######.'];
 const Z = ['#######', '#######', '....##.', '...##..', '..##...', '.##....', '##.....', '#######', '#######'];
@@ -57,7 +62,16 @@ const esc = (s) => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replac
 function textzeile(y, teile, zeichen) {
   // textLength hält die Breite fest, auch wenn der Betrachter eine andere Schrift als Consolas hat
   const spans = teile.map(([klasse, inhalt]) => `<tspan class="${klasse}">${esc(inhalt)}</tspan>`).join('');
-  return `<text x="${TEXT_X}" y="${y}" textLength="${(zeichen * ZEICHEN).toFixed(1)}" lengthAdjust="spacingAndGlyphs">${spans}</text>`;
+  return `<text x="${TEXT_X}" y="${y}" textLength="${(zeichen * ZEICHEN).toFixed(1)}" lengthAdjust="spacing">${spans}</text>`;
+}
+
+// Überschrift mit durchgezogener Linie bis zum rechten Rand. Als Zeichen „─“ bekäme die Linie
+// durch den Zeichenabstand Lücken.
+function ueberschrift(y, teile) {
+  const zeichen = teile.reduce((n, [, inhalt]) => n + inhalt.length, 0) + 1;
+  const von = TEXT_X + zeichen * ZEICHEN, bis = TEXT_X + BREITE * ZEICHEN;
+  return textzeile(y, teile, zeichen - 1) +
+    `\n  <line class="linie" x1="${von.toFixed(1)}" y1="${y - 5}" x2="${bis.toFixed(1)}" y2="${y - 5}"/>`;
 }
 
 function rechteSeite() {
@@ -66,11 +80,9 @@ function rechteSeite() {
   for (const z of zeilen) {
     if (z === null) { y += ZEILE; continue; }
     if (z.kopf) {
-      const strich = ' ' + '─'.repeat(BREITE - z.kopf.length - 1);
-      out.push(textzeile(y, [['key', z.kopf], ['punkte', strich]], BREITE));
+      out.push(ueberschrift(y, [['key', z.kopf]]));
     } else if (z.titel) {
-      const anfang = '- ' + z.titel + ' ';
-      out.push(textzeile(y, [['text', anfang], ['punkte', '─'.repeat(BREITE - anfang.length)]], BREITE));
+      out.push(ueberschrift(y, [['text', '- ' + z.titel]]));
     } else if (z.stats) {
       // Mehrere Werte in einer Zeile, getrennt mit |
       const teile = [];
@@ -120,6 +132,7 @@ function karte(modus) {
   .key { fill: ${f.key}; }
   .value { fill: ${f.value}; }
   .punkte { fill: ${f.punkte}; }
+  .linie { stroke: ${f.punkte}; stroke-width: 1; }
 </style>
 <defs>
   <linearGradient id="verlauf" gradientUnits="userSpaceOnUse" x1="0" y1="${BILD_Y}" x2="0" y2="${BILD_Y + p.hoehe}">
