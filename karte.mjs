@@ -7,7 +7,7 @@ import { fileURLToPath } from 'node:url';
 const ordner = dirname(fileURLToPath(import.meta.url));
 
 // Zahlen, die später eine Action täglich einsetzt
-const zahlen = { repos: 1, sterne: 1, follower: 1, beitraege: 312 };
+const zahlen = { repos: 1, sterne: 1, follower: 1, beitraege: 315 };
 
 // Platz pro Zeichen für die breiteste übliche Schrift (Menlo, Courier New: 0,6em).
 // Consolas ist schmaler (8,8px); dort verteilt textLength den Rest als Abstand.
@@ -46,15 +46,18 @@ const zeilen = [
 // Zeichen pro Zeile rechts: so viele, wie die längste Zeile mit drei Punkten braucht
 const BREITE = Math.max(...zeilen.filter(Array.isArray).map(([k, v]) => (k ? k.length + 2 : 0) + v.length + 6));
 
-// Pixelbild: S über Z, je 7 × 9
+// Pixelbild: S über Z, je 7 × 9. Die Diagonale im Z ist drei Pixel breit, damit sie oben rechts
+// und unten links an die Balken anschließt.
 const S = ['.######', '#######', '##.....', '##.....', '######.', '.######', '.....##', '#######', '######.'];
-const Z = ['#######', '#######', '....##.', '...##..', '..##...', '.##....', '##.....', '#######', '#######'];
+const Z = ['#######', '#######', '....###', '...###.', '..###..', '.###...', '###....', '#######', '#######'];
 const bild = [...S, '.......', '.......', ...Z];
 const PIXEL = 20, ABSTAND = 2, BILD_X = 38, BILD_Y = 30;
 
+// Wie auf sergeyzakh.github.io: Blau nur für SZ und die Kopfzeile, Schlüssel fett in Textfarbe,
+// Werte gedämpft. Im dunklen Modus ist der Akzent eine hellere Stufe desselben Blaus.
 const farben = {
-  dark:  { grund: '#161b22', text: '#c9d1d9', key: '#ffa657', value: '#a5d6ff', punkte: '#616e7f', oben: '#ffa657', unten: '#f778ba', schatten: '#30363d' },
-  light: { grund: '#f6f8fa', text: '#24292f', key: '#953800', value: '#0a3069', punkte: '#c2cfde', oben: '#bc4c00', unten: '#bf3989', schatten: '#d0d7de' },
+  dark:  { grund: '#161b22', text: '#e6edf3', key: '#e6edf3', value: '#9198a1', akzent: '#7fb0db', punkte: '#484f58', oben: '#1f639f', unten: '#5b9bd0', schatten: '#30363d' },
+  light: { grund: '#f6f8fa', text: '#24292f', key: '#24292f', value: '#57606a', akzent: '#004680', punkte: '#c2cfde', oben: '#1f639f', unten: '#5b9bd0', schatten: '#d0d7de' },
 };
 
 const esc = (s) => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
@@ -80,7 +83,7 @@ function rechteSeite() {
   for (const z of zeilen) {
     if (z === null) { y += ZEILE; continue; }
     if (z.kopf) {
-      out.push(ueberschrift(y, [['key', z.kopf]]));
+      out.push(ueberschrift(y, [['akzent', z.kopf]]));
     } else if (z.titel) {
       out.push(ueberschrift(y, [['text', '- ' + z.titel]]));
     } else if (z.stats) {
@@ -129,8 +132,9 @@ function karte(modus) {
 <title>sz@github</title>
 <style>
   text { white-space: pre; fill: ${f.text}; }
-  .key { fill: ${f.key}; }
+  .key { fill: ${f.key}; font-weight: 700; }
   .value { fill: ${f.value}; }
+  .akzent { fill: ${f.akzent}; font-weight: 700; }
   .punkte { fill: ${f.punkte}; }
   .linie { stroke: ${f.punkte}; stroke-width: 1; }
 </style>

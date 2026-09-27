@@ -3,15 +3,16 @@
 <title>sz@github</title>
 <style>
   text { white-space: pre; fill: #24292f; }
-  .key { fill: #953800; }
-  .value { fill: #0a3069; }
+  .key { fill: #24292f; font-weight: 700; }
+  .value { fill: #57606a; }
+  .akzent { fill: #004680; font-weight: 700; }
   .punkte { fill: #c2cfde; }
   .linie { stroke: #c2cfde; stroke-width: 1; }
 </style>
 <defs>
   <linearGradient id="verlauf" gradientUnits="userSpaceOnUse" x1="0" y1="30" x2="0" y2="470">
-    <stop offset="0" stop-color="#bc4c00"/>
-    <stop offset="1" stop-color="#bf3989"/>
+    <stop offset="0" stop-color="#1f639f"/>
+    <stop offset="1" stop-color="#5b9bd0"/>
   </linearGradient>
 </defs>
 <rect width="100%" height="100%" rx="15" fill="#f6f8fa"/>
@@ -76,14 +77,19 @@
   <rect x="174" y="298" width="20" height="20"/>
   <rect x="130" y="320" width="20" height="20"/>
   <rect x="152" y="320" width="20" height="20"/>
+  <rect x="174" y="320" width="20" height="20"/>
   <rect x="108" y="342" width="20" height="20"/>
   <rect x="130" y="342" width="20" height="20"/>
+  <rect x="152" y="342" width="20" height="20"/>
   <rect x="86" y="364" width="20" height="20"/>
   <rect x="108" y="364" width="20" height="20"/>
+  <rect x="130" y="364" width="20" height="20"/>
   <rect x="64" y="386" width="20" height="20"/>
   <rect x="86" y="386" width="20" height="20"/>
+  <rect x="108" y="386" width="20" height="20"/>
   <rect x="42" y="408" width="20" height="20"/>
   <rect x="64" y="408" width="20" height="20"/>
+  <rect x="86" y="408" width="20" height="20"/>
   <rect x="42" y="430" width="20" height="20"/>
   <rect x="64" y="430" width="20" height="20"/>
   <rect x="86" y="430" width="20" height="20"/>
@@ -160,14 +166,19 @@
   <rect x="170" y="294" width="20" height="20"/>
   <rect x="126" y="316" width="20" height="20"/>
   <rect x="148" y="316" width="20" height="20"/>
+  <rect x="170" y="316" width="20" height="20"/>
   <rect x="104" y="338" width="20" height="20"/>
   <rect x="126" y="338" width="20" height="20"/>
+  <rect x="148" y="338" width="20" height="20"/>
   <rect x="82" y="360" width="20" height="20"/>
   <rect x="104" y="360" width="20" height="20"/>
+  <rect x="126" y="360" width="20" height="20"/>
   <rect x="60" y="382" width="20" height="20"/>
   <rect x="82" y="382" width="20" height="20"/>
+  <rect x="104" y="382" width="20" height="20"/>
   <rect x="38" y="404" width="20" height="20"/>
   <rect x="60" y="404" width="20" height="20"/>
+  <rect x="82" y="404" width="20" height="20"/>
   <rect x="38" y="426" width="20" height="20"/>
   <rect x="60" y="426" width="20" height="20"/>
   <rect x="82" y="426" width="20" height="20"/>
@@ -183,7 +194,7 @@
   <rect x="148" y="448" width="20" height="20"/>
   <rect x="170" y="448" width="20" height="20"/>
 </g>
-  <text x="230" y="40" textLength="88.2" lengthAdjust="spacing"><tspan class="key">sz@github</tspan></text>
+  <text x="230" y="40" textLength="88.2" lengthAdjust="spacing"><tspan class="akzent">sz@github</tspan></text>
   <line class="linie" x1="328.0" y1="35" x2="837.6" y2="35"/>
   <text x="230" y="60" textLength="607.6" lengthAdjust="spacing"><tspan class="punkte">. </tspan><tspan class="key">OS: </tspan><tspan class="punkte">............................</tspan><tspan class="value"> Windows 11, Linux in Docker</tspan></text>
   <text x="230" y="80" textLength="607.6" lengthAdjust="spacing"><tspan class="punkte">. </tspan><tspan class="key">Uptime: </tspan><tspan class="punkte">...........................................</tspan><tspan class="value"> 26 years</tspan></text>
@@ -203,5 +214,5 @@
   <text x="230" y="420" textLength="137.2" lengthAdjust="spacing"><tspan class="text">- GitHub Stats</tspan></text>
   <line class="linie" x1="377.0" y1="415" x2="837.6" y2="415"/>
   <text x="230" y="440" textLength="352.8" lengthAdjust="spacing"><tspan class="punkte">. </tspan><tspan class="key">Repos: </tspan><tspan class="value">1</tspan><tspan class="text"> | </tspan><tspan class="key">Stars: </tspan><tspan class="value">1</tspan><tspan class="text"> | </tspan><tspan class="key">Followers: </tspan><tspan class="value">1</tspan></text>
-  <text x="230" y="460" textLength="313.6" lengthAdjust="spacing"><tspan class="punkte">. </tspan><tspan class="key">Contributions (last year): </tspan><tspan class="value">312</tspan></text>
+  <text x="230" y="460" textLength="313.6" lengthAdjust="spacing"><tspan class="punkte">. </tspan><tspan class="key">Contributions (last year): </tspan><tspan class="value">315</tspan></text>
 </svg>

@@ -3,4 +3,4 @@
   <img alt="Profilkarte im Stil von neofetch mit den Buchstaben SZ als Pixelbild und Angaben zu Ausbildung, Sprachen, Werkzeugen und Projekten" src="light_mode.svg">
 </picture>
 
-[LinkedIn](https://www.linkedin.com/in/sergey-zakharov-jr/) · [Ausbildungs-Berichtsheft](https://github.com/SergeyZakh/Ausbildungs-Berichtsheft)
+[sergeyzakh.github.io](https://sergeyzakh.github.io) · [LinkedIn](https://www.linkedin.com/in/sergey-zakharov-jr/) · [Ausbildungs-Berichtsheft](https://github.com/SergeyZakh/Ausbildungs-Berichtsheft)
